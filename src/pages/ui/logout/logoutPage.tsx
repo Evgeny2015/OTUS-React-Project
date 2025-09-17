@@ -1,6 +1,6 @@
-import { FC, useEffect } from "react"
+import { type FC, useEffect } from "react"
 import { useNavigate } from "react-router"
-import { useAuth } from "src/context/auth-provider/AuthProvider"
+import { useAuth } from "../../../app/providers"
 
 
 const LogoutPage: FC = () => {

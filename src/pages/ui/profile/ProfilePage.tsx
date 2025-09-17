@@ -1,70 +1,70 @@
-import React, { FC, useMemo, useState } from "react"
-import { FormikConfig, useFormik } from "formik";
-import { Button } from "antd";
-import { useNavigate } from "react-router"
+import { useEffect, type FC } from "react"
+import { useSelector } from "react-redux";
+import { Form, Alert, Button, Input } from "antd"
 
-import ProfileForm from "src/features/forms/ProfileForm/ProfileForm"
-import { ProfileFormErrors, ProfileFormValues } from "src/features/forms/ProfileForm/types";
-import { isNotDefinedString } from "src/utils/validation";
-import './ProfilePage.css'
-import { Profile } from "src/models/profile";
+import { type Profile } from "../../../entities";
+import { useAuth } from "../../../app/providers";
+import { profileSelectors } from "../../../app/store";
 
 const ProfilePage: FC = () => {
-  const [profile, setProfile] = useState<Profile>()
-  const navigate = useNavigate()
+  const { clear, saveProfile, errors } = useAuth()
+  const profile = useSelector(profileSelectors.get)
 
-  const { onSubmit, validate, initialValues } = useMemo<
-    Pick<FormikConfig<ProfileFormValues>, 'onSubmit' | 'validate' | 'initialValues'>
-  >(() => {
-    return {
-      initialValues: {
-        id: profile.id,
-        name: profile.name,
-        email: profile.email,
-        signUpDate: profile.signUpDate,
-        commandId: profile.commandId
-      },
-      onSubmit: (values, { setErrors }) => {
-        try {
-          // Сохранение данных формы
-          // value - содержит поля формы
-
-          // Переход на главную страницу
-          navigate("/")
-
-        } catch (error) {
-          // Ошибка сохранения данных формы
-          console.log('save error', error)
-        }
-      },
-      validate: (values) => {
-        // Валидация формы
-        // value - содержит поля формы
-        const errors = {} as ProfileFormErrors;
-        if (isNotDefinedString(values.email)) {
-          errors.email = 'Обязательное поле'
-        }
-        return errors;
-      },
-    };
-  }, [profile]);
-
-  const formManager = useFormik<ProfileFormValues>({
-    initialValues,
-    onSubmit,
-    validate,
-  });
-  const { submitForm, setValues } = formManager;
+  useEffect(() => {
+    clear()
+  }, [])
 
   return (
-    <div className="profile">
-      <ProfileForm formManager={formManager} />
-      <div>
-        <Button type="primary" onClick={submitForm}>
+    <Form
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 12 }}
+      onFinish={(values) => saveProfile(values)}
+      initialValues={profile ?? {}}
+    >
+      <Form.Item<Profile>
+        label='Идентификатор пользователя'
+        name='id'
+      >
+        <Input disabled />
+      </Form.Item>
+
+      <Form.Item<Profile>
+        label='Имя пользователя'
+        name='name'
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item<Profile>
+        label='Адрес эл. почты'
+        name='email'
+      >
+        <Input disabled />
+      </Form.Item>
+
+      <Form.Item<Profile>
+        label='Дата регистрации'
+        name='signUpDate'
+      >
+        <Input disabled />
+      </Form.Item>
+
+      <Form.Item<Profile>
+        label='Идентификатор команды'
+        name='commandId'
+      >
+        <Input disabled />
+      </Form.Item>
+
+      {(errors.length > 0) &&
+        <Alert message={errors} type="error" style={{ marginBottom: 20 }} />
+      }
+      <Form.Item label={null}>
+        <Button type="primary" htmlType="submit">
           Сохранить
         </Button>
-      </div>
-    </div>
+      </Form.Item>
+    </Form>
   )
 }
 
