@@ -1,3 +1,3 @@
-import Shared from './Shared.tsx'
+import ProductItem from './productItem/productItem.tsx'
 
-export { Shared }
+export { ProductItem }

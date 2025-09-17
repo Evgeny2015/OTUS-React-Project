@@ -2,16 +2,18 @@ import { type FC } from "react"
 import { Navigate, Route, Routes } from "react-router"
 import { APP_ROUTE } from "../config";
 
-import { LoginPage, LogoutPage, RegisterPage, PageLayout, ProfilePage, NotFoundPage } from "../../pages/index";
 import ProtectedRoute from "./protectedRoute";
+import { ProfilePage, NotFoundPage } from "../../pages/index";
+import { LoginPage, LogoutPage, RegisterPage, PageLayout } from "../../pages";
+import { ProductPage } from "../../pages";
 
 
 const AppRoutes: FC = () => {
   return (
     <Routes>
       <Route element={<PageLayout />}>
-        {/* <Route path="/" element={<Navigate to={"/prod"} />} /> */}
-        {/* <Route path="/prod" element={<ProtectedRoute><ProductPage /></ProtectedRoute>} /> */}
+        <Route path={APP_ROUTE.root} element={<Navigate to={APP_ROUTE.product} />} />
+        <Route path={APP_ROUTE.product} element={<ProtectedRoute><ProductPage /></ProtectedRoute>} />
         {/* <Route path="/basket" element={<ProtectedRoute><BasketPage /></ProtectedRoute>} /> */}
         {/* <Route path="/order" element={<ProtectedRoute><OrderPage /></ProtectedRoute>} /> */}
         {/* <Route path="/add" element={<ProtectedRoute><ProductAdd /></ProtectedRoute>} /> */}
@@ -21,7 +23,6 @@ const AppRoutes: FC = () => {
         <Route path={APP_ROUTE.login} element={<LoginPage />} />
         <Route path={APP_ROUTE.register} element={<RegisterPage />} />
 
-        <Route path="/" element={<NotFoundPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

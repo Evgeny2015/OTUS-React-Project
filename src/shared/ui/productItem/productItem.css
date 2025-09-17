@@ -1,0 +1,14 @@
+.product-card {
+    margin: 5px;
+}
+
+.description {
+    padding: 8px;
+    color: rgb(111, 117, 117);
+    height: 80px;
+    width: 320px;
+}
+
+.product-price {
+    padding: 8px;
+}
