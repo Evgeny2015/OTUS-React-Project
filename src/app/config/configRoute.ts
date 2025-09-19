@@ -7,6 +7,9 @@ export const APP_ROUTE = {
     register: '/register',
 
     product: '/prod',
+    productAdd: '/add',
+    productEdit: '/edit',
+
     basket: '/basket',
     order: '/order'
 }

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router"
 import { useDispatch } from "react-redux"
 import { Button } from "antd"
 
+import { APP_ROUTE } from "../../../app"
 import { ProductApi } from "../../../app/api"
 import { useAuth } from "../../../app/providers"
 import { basketActions } from "../../../app/store"
@@ -121,8 +122,9 @@ const ProductPage: FC = () => {
             <ProductItem
               key={x.id}
               product={x}
+              addLink={APP_ROUTE.productAdd}
+              editLink={`${APP_ROUTE.productEdit}/${x.id}`}
               onAddToBasket={handleAddToBasket}
-              onEditProduct={() => handleEditProduct(x)}
             />
           ))
         }

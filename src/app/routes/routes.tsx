@@ -2,8 +2,9 @@ import { type FC } from "react"
 import { Navigate, Route, Routes } from "react-router"
 import { APP_ROUTE } from "../config";
 
-import ProtectedRoute from "./protectedRoute";
-import { ProfilePage, NotFoundPage } from "../../pages/index";
+
+import { ProtectedRoute } from "..";
+import { ProfilePage, NotFoundPage } from "../../pages";
 import { LoginPage, LogoutPage, RegisterPage, PageLayout } from "../../pages";
 import { ProductPage } from "../../pages";
 

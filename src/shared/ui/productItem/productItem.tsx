@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 import { Button, Card, Flex, Image, Space, Statistic } from 'antd';
-import { LikeOutlined } from '@ant-design/icons'
+import { LikeOutlined, EditOutlined } from '@ant-design/icons'
 import './productItem.css';
 
 import { useAuth } from '../../../app/providers';
@@ -9,14 +9,15 @@ import type { Product } from '../../../entities';
 
 export interface ProductItemProps {
     product: Product
+    addLink: string
+    editLink?: string
     onAddToBasket?: (product: Product) => void
-    onEditProduct?: (product: Product) => void
 };
 
 /**
  * Компонент полного отображения товара
  */
-const ProductItem: FC<ProductItemProps> = ({ product, onAddToBasket, onEditProduct }) => {
+const ProductItem: FC<ProductItemProps> = ({ product, addLink, editLink: edit, onAddToBasket }) => {
     const { isAdmin } = useAuth()
 
     const handleAddToBasket = () => {
@@ -24,15 +25,11 @@ const ProductItem: FC<ProductItemProps> = ({ product, onAddToBasket, onEditProdu
             onAddToBasket(product)
     }
 
-    const handleEditProduct = () => {
-        if (onEditProduct)
-            onEditProduct(product)
-    }
-
     return (
         <Card
             className='product-card'
             title={product.name}
+            extra={isAdmin() && (!!edit) && <a href={edit}>ред <EditOutlined/></a>}
             >
             <Flex vertical={true}>
                 <Flex vertical={false}>
@@ -62,21 +59,11 @@ const ProductItem: FC<ProductItemProps> = ({ product, onAddToBasket, onEditProdu
                                 onClick={handleAddToBasket}>
                                 В корзину
                             </Button>
-                            {isAdmin() &&
-                                <Button
-                                    color="primary"
-                                    variant='outlined'
-                                    size='small'
-                                    onClick={handleEditProduct}
-                                >
-                                    Ред-ть
-                                </Button>
-                            }
                         </Flex>
                     </Flex>
                 </Flex>
             </Flex>
-        </Card>
+        </Card >
     );
 };
 
