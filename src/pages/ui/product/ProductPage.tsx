@@ -12,7 +12,6 @@ import type { Product } from "../../../entities"
 import './ProductPage.css'
 
 
-// const PRODUCT_LIST_COUNT = 20
 const LIST_GROW_COUNT = 10
 
 // Список товаров
@@ -104,16 +103,6 @@ const ProductPage: FC = () => {
     dispatcher(basketActions.add(product))
   }
 
-  // редактируем товар
-  const handleEditProduct = (product: Product) => {
-    navigator(`/edit/${product?.id}`)
-  }
-
-  // новый товар
-  const handleAddProduct = () => {
-    navigator('/add')
-  }
-
   return (
     <div>
       <div className='scrollBox' ref={containerRef}>
@@ -122,7 +111,6 @@ const ProductPage: FC = () => {
             <ProductItem
               key={x.id}
               product={x}
-              addLink={APP_ROUTE.productAdd}
               editLink={`${APP_ROUTE.productEdit}/${x.id}`}
               onAddToBasket={handleAddToBasket}
             />
@@ -131,7 +119,7 @@ const ProductPage: FC = () => {
       </div>
 
       {isAdmin() &&
-        <Button type="primary" onClick={() => handleAddProduct()}>Новый товар</Button>
+        <Button type="primary" onClick={() => navigator(APP_ROUTE.productAdd)}>Новый товар</Button>
       }
     </div>
   )

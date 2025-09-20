@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BACK_URI } from '..'
 import type { RtkState } from '../store'
-import type { PageRequest } from '../../entities'
+import type { FileUploaded, PageRequest } from '../../entities'
 import type { Product, ProductAddModel, ProductUpdateModel, ProductResponse } from '../../entities'
 
 
@@ -47,8 +47,20 @@ export const ProductApi = createApi({
                 body: product,
             }),
         }),
+        rtkUploadImage: builder.mutation<FileUploaded, File>({
+            query: (file: File) => {
+                const body = new FormData();
+                body.append('file', file);
+
+                return {
+                    url: '/upload',
+                    method: 'POST',
+                    body: body,
+                }
+            },
+        }),
     })
 
 });
 
-export const { useRtkGetProductMutation, useRtkCreateProductMutation, useRtkUpdateProductMutation, useRtkGetProductsMutation } = ProductApi
+export const { useRtkGetProductMutation, useRtkCreateProductMutation, useRtkUpdateProductMutation, useRtkGetProductsMutation, useRtkUploadImageMutation } = ProductApi

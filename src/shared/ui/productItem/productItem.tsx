@@ -9,7 +9,6 @@ import type { Product } from '../../../entities';
 
 export interface ProductItemProps {
     product: Product
-    addLink: string
     editLink?: string
     onAddToBasket?: (product: Product) => void
 };
@@ -17,7 +16,7 @@ export interface ProductItemProps {
 /**
  * Компонент полного отображения товара
  */
-const ProductItem: FC<ProductItemProps> = ({ product, addLink, editLink: edit, onAddToBasket }) => {
+const ProductItem: FC<ProductItemProps> = ({ product, editLink: edit, onAddToBasket }) => {
     const { isAdmin } = useAuth()
 
     const handleAddToBasket = () => {
