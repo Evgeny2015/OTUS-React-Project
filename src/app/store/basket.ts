@@ -1,13 +1,13 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Product } from "../../entities";
+import type { BasketProductModel } from "../../entities";
 import { type RtkState, tokenActions } from "./";
 
 
 const basketSlice = createSlice({
     name: 'basket',
-    initialState: (): Product[] => [],
+    initialState: (): BasketProductModel[] => [],
     reducers: {
-        add: (state, action: PayloadAction<Product>) => {
+        add: (state, action: PayloadAction<BasketProductModel>) => {
             if (state === null) {
                 return [action.payload];
             }
@@ -18,12 +18,18 @@ const basketSlice = createSlice({
             }
         },
         clear: () => [],
-        remove: (state, action: PayloadAction<Product["id"]>) => {
+        remove: (state, action: PayloadAction<BasketProductModel["id"]>) => {
             const index = state.findIndex(x => x.id === action.payload);
             if( index >= 0) {
                 state.splice(index, 1)
             }
         },
+        setQuantity: (state, action: PayloadAction<{id: BasketProductModel["id"], quantity: number}>) => {
+            const index = state.findIndex(x => x.id === action.payload.id);
+            if( index >= 0) {
+                state[index].quantity = action.payload.quantity
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(tokenActions.clear, () => {

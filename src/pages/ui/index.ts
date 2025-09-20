@@ -7,6 +7,8 @@ import ProfilePage from './profile/profilePage'
 import ProductPage from './product/productPage'
 import ProductEditPage from './productEdit/productEdit.page'
 import ProductAdd from './productAdd/prodAdd.page'
+import BasketPage from './basket/BasketPage'
 
 export { LoginPage, LogoutPage, RegisterPage, PageLayout, ProfilePage, NotFoundPage }
+export { BasketPage }
 export { ProductPage, ProductAdd, ProductEditPage }

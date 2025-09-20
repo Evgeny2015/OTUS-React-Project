@@ -4,7 +4,7 @@ import { APP_ROUTE } from "../config";
 
 
 import { ProtectedRoute } from "..";
-import { ProfilePage, NotFoundPage, ProductAdd } from "../../pages";
+import { ProfilePage, NotFoundPage, ProductAdd, BasketPage } from "../../pages";
 import { LoginPage, LogoutPage, RegisterPage, PageLayout } from "../../pages";
 import { ProductPage, ProductEditPage } from "../../pages";
 
@@ -15,7 +15,7 @@ const AppRoutes: FC = () => {
       <Route element={<PageLayout />}>
         <Route path={APP_ROUTE.root} element={<Navigate to={APP_ROUTE.product} />} />
         <Route path={APP_ROUTE.product} element={<ProtectedRoute><ProductPage /></ProtectedRoute>} />
-        {/* <Route path="/basket" element={<ProtectedRoute><BasketPage /></ProtectedRoute>} /> */}
+        <Route path={APP_ROUTE.basket} element={<ProtectedRoute><BasketPage /></ProtectedRoute>} />
         {/* <Route path="/order" element={<ProtectedRoute><OrderPage /></ProtectedRoute>} /> */}
         <Route path={APP_ROUTE.productAdd} element={<ProtectedRoute><ProductAdd /></ProtectedRoute>} />
         <Route path={`${APP_ROUTE.productEdit}/:id`} element={<ProtectedRoute><ProductEditPage /></ProtectedRoute>} />

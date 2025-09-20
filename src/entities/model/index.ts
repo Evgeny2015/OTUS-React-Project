@@ -6,6 +6,7 @@ export type {Pagination, Sorting}
 import { type Category } from "./category/category"
 
 export * from './auth'
+export * from './basket'
 export { type Category }
 export * from './order'
 export * from './product'

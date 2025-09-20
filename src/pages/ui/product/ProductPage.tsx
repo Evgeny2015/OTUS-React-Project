@@ -8,7 +8,7 @@ import { ProductApi } from "../../../app/api"
 import { useAuth } from "../../../app/providers"
 import { basketActions } from "../../../app/store"
 import { ProductItem } from "../../../shared"
-import type { Product } from "../../../entities"
+import { GetBasketFromProduct, type Product } from "../../../entities"
 import './ProductPage.css'
 
 
@@ -100,7 +100,7 @@ const ProductPage: FC = () => {
 
   // добавляем товар в корзину
   const handleAddToBasket = (product: Product) => {
-    dispatcher(basketActions.add(product))
+    dispatcher(basketActions.add(GetBasketFromProduct(product)))
   }
 
   return (
