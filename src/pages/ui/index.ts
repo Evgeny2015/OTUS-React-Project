@@ -6,6 +6,7 @@ import RegisterPage from './register/registerPage'
 import ProfilePage from './profile/profilePage'
 import ProductPage from './product/productPage'
 import ProductEditPage from './productEdit/productEdit.page'
+import ProductAdd from './productAdd/prodAdd.page'
 
 export { LoginPage, LogoutPage, RegisterPage, PageLayout, ProfilePage, NotFoundPage }
-export { ProductPage, ProductEditPage }
+export { ProductPage, ProductAdd, ProductEditPage }

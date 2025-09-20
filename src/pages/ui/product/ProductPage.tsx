@@ -12,7 +12,7 @@ import type { Product } from "../../../entities"
 import './ProductPage.css'
 
 
-const LIST_GROW_COUNT = 10
+const LIST_GROW_COUNT = 4
 
 // Список товаров
 let products = new Map<string, Product>()

@@ -39,27 +39,24 @@ const ProductEditPage: FC = () => {
 
     const handleUpload = (file: File) => {
         if (!!id)
-        uploadImage(file)
-            .unwrap()
-            .then(x => {
-                const update: ProductUpdateModel = {
-                    id,
-                    photo: x.url
-                }
-                updateProduct(update)
-                    .unwrap()
-                    .then(x => console.debug(x))
-            })
-            .then(x => {
-                console.debug('loaded ==', x)
-            })
-            .catch(x => console.error(x))
+            uploadImage(file)
+                .unwrap()
+                .then(x => {
+                    const update: ProductUpdateModel = {
+                        id,
+                        photo: x.url
+                    }
+                    updateProduct(update)
+                        .unwrap()
+                        .then(x => {
+                            setEditProduct({ ...editProduct, photo: x.photo })
+                        })
+                })
+                .catch(x => console.error(x))
     }
 
     const handleSaveProductSubmit = (data: ProductEditModel) => {
         const update = getProductUpdates(editProduct, data)
-
-        console.debug(update)
 
         if (!!id && !!update) {
             update.id = id
