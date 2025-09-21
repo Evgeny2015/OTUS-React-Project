@@ -18,6 +18,7 @@ const LIST_GROW_COUNT = 4
 // Список товаров
 let products = new Map<string, Product>()
 let page = 1
+let selectedCategory: Category[] = []
 
 
 const ProductPage: FC = () => {
@@ -25,7 +26,6 @@ const ProductPage: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const dispatcher = useDispatch()
   const [lastItem, setLastItem] = useState<Element>()
-  const [selectedCategory, setSelectedCategory] = useState<Category[]>([])
   const [product, setProduct] = useState<Product[]>([])
   const navigator = useNavigate()
 
@@ -37,7 +37,7 @@ const ProductPage: FC = () => {
   const loadNextProduct = () => {
     getProducts(
       {
-        categoryIds: selectedCategory.map(x => x.name),
+        categoryIds: selectedCategory.map(x => x.id),
         pagination: {
           pageSize: LIST_GROW_COUNT,
           pageNumber: page
@@ -79,10 +79,9 @@ const ProductPage: FC = () => {
 
   // Первая загрузка компонента
   useEffect(() => {
-    if (!products.size)
+      page = 1
+      products.clear()
       loadNextProduct()
-    else
-      setProduct([...products.values()])
   }, [selectedCategory])
 
   // При изменении списка запоминаем последнюю позицию
@@ -110,9 +109,13 @@ const ProductPage: FC = () => {
     dispatcher(basketActions.add(GetBasketFromProduct(product)))
   }
 
-  const handleChangeCategory = (selected: string[]) => {
-    setSelectedCategory(selectedCategory.filter(x => selected.includes(x.id)))
-    console.debug('sel ==', selected)
+  const handleChangeCategory = (selected: string | string[]) => {
+    if (categories) {
+      page = 1
+      products.clear()
+      selectedCategory = categories.data.filter(x => selected.includes(x.id))
+      loadNextProduct()
+    }
   }
 
   return (
@@ -122,8 +125,9 @@ const ProductPage: FC = () => {
         <Flex>
           <CategorySelector
             options={categories?.data.map(x => ({label: x.name, value: x.id})) ?? []}
-            defaults={(categories && categories.data.length > 0) ? [categories?.data[0].name] : []}
+            defaults={(selectedCategory) ? selectedCategory.map(x => x.name) : []}
             onChange={handleChangeCategory}
+            multiple={true}
             />
           <span className="categoty-link">
             <Typography.Link

@@ -99,7 +99,7 @@ GET {{protocol}}://{{host}}/api/categories/68bc7bc78e877ac8a9c6a83e
 GET {{protocol}}://{{host}}/api/products?pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
 
 ### Продукты команды
-GET {{protocol}}://{{host}}/api/products?categoryIds=["68bc7bc78e877ac8a9c6a83e"]&pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
+GET {{protocol}}://{{host}}/api/products?categoryIds=["68d03e6c8e877ac8a9c6d9f0"]&pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODM4MDczMSwiZXhwIjoxNzU5MjQ0NzMxfQ.TYECs8NOBEQ5HIIqknEXomP-zWZUBvw22XDJ9v8Yylc
 
 

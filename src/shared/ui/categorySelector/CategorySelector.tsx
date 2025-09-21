@@ -3,15 +3,16 @@ import { Select, type SelectProps } from "antd"
 
 
 export type CategorySelector = {
-    options: SelectProps['options']
     defaults: string[]
-    onChange: (selected: string[]) => void
+    options: SelectProps['options']
+    multiple: boolean
+    onChange: (selected: string | string[]) => void
 }
 
-const CategorySelector: FC<CategorySelector> = ({ options, defaults, onChange }) => {
+const CategorySelector: FC<CategorySelector> = ({ options, defaults, multiple, onChange }) => {
     return (
         <Select
-            mode="multiple"
+            mode={multiple ? "multiple" : undefined}
             defaultValue={defaults}
             style={{ width: '100%' }}
             options={options}

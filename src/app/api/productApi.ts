@@ -34,6 +34,7 @@ export const ProductApi = createApi({
                 return {
                     url: '/products',
                     params: {
+                        categoryIds: JSON.stringify(request.categoryIds ?? []),
                         pagination: JSON.stringify(request.pagination),
                         sorting: JSON.stringify(request.sorting)
                     }
