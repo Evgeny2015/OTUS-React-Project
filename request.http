@@ -64,11 +64,11 @@ GET {{protocol}}://{{host}}/api/categories
 
 ### Категории команды
 GET {{protocol}}://{{host}}/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODQ2MTAxOCwiZXhwIjoxNzU5MzI1MDE4fQ.eWjoia-z_VW08byuEqntdxGGYe3JbzMWTaEL7b7Xiiw
 
 ### Новая категоря
 POST  {{protocol}}://{{host}}/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODQ2MTAxOCwiZXhwIjoxNzU5MzI1MDE4fQ.eWjoia-z_VW08byuEqntdxGGYe3JbzMWTaEL7b7Xiiw
 content-type: application/json
 
 {
@@ -76,12 +76,12 @@ content-type: application/json
 }
 
 ### Обновление категории
-PUT  {{protocol}}://{{host}}/api/categories/68bc7b588e877ac8a9c6a82c
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+PUT  {{protocol}}://{{host}}/api/categories/68bc7bc78e877ac8a9c6a83e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODQ2MTAxOCwiZXhwIjoxNzU5MzI1MDE4fQ.eWjoia-z_VW08byuEqntdxGGYe3JbzMWTaEL7b7Xiiw
 content-type: application/json
 
 {
-    "name": "Category 2"
+    "name": "Мониторы"
 }
 
 ### удаление категории

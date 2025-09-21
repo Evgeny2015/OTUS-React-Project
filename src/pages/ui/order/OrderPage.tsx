@@ -1,8 +1,9 @@
 import { Button, Card, Table } from "antd"
-import React, { FC, useEffect, useState } from "react"
-import { OrderResponse } from "src/models/order/orderResponse"
-import { useRtkDeleteProductMutation, useRtkGetOrdersMutation } from "src/services/OrderService/OrderService"
+import { type FC, useEffect, useState } from "react"
+import type { Order } from "../../../entities"
+import { OrderApi } from "../../../app"
 import './OrderPage.css'
+import { OrderStatusItem } from "../../../shared"
 
 // Описание колонок в таблице товаров для заказа
 const columns = [
@@ -21,13 +22,18 @@ const columns = [
         dataIndex: 'quantity',
         key: 'quantity',
     },
+    {
+        title: 'Итого',
+        dataIndex: 'total',
+        key: 'total',
+    },
 ];
 
 
 const OrderPage: FC = () => {
-    const [getOrders, response] = useRtkGetOrdersMutation()
-    const [deleteOrder] = useRtkDeleteProductMutation()
-    const [orders, setOrders] = useState<OrderResponse>(null)
+    const [getOrders] = OrderApi.useRtkGetOrdersMutation()
+    const [deleteOrder] = OrderApi.useRtkDeleteProductMutation()
+    const [orders, setOrders] = useState<Order[]>([])
 
     // Загружаем заказы
     const loadOrders = () => {
@@ -43,7 +49,10 @@ const OrderPage: FC = () => {
                 }
             }
         )
-            .then(x => setOrders(x.data ?? null))
+            .then(x => {
+                if (x.data)
+                    setOrders(x.data.data)
+            })
     }
 
     // Первая загрузка компонента
@@ -60,14 +69,15 @@ const OrderPage: FC = () => {
 
     return (
         <>
-            {((orders === null) || (orders.data.length === 0)) ?
+            {((orders.length === 0)) ?
                 <div>Нет заказов</div> :
                 <div className="orders">
                     {
-                        orders.data.map(x => (
+                        orders.map(x => (
                             <Card
-                                title={`Заказ ${x.createdAt}`}
                                 key={x.id}
+                                title={<>Заказ ${x.createdAt} <OrderStatusItem status={x.status} /></>}
+                                style={{ margin: 5 }}
                                 extra={
                                     <Button color="primary" variant="outlined" size="small"
                                         onClick={() => handleCancelOrder(x.id)}>
@@ -80,11 +90,25 @@ const OrderPage: FC = () => {
                                             key: x._id,
                                             name: x.product.name,
                                             price: x.product.price,
-                                            quantity: x.quantity
+                                            quantity: x.quantity,
+                                            total: x.product.price * x.quantity
                                         }
                                     })}
                                     columns={columns}
                                     pagination={false}
+                                    summary={() => {
+                                        const total = x.products.map(x => x.product.price*x.quantity).reduce((a, x) => a + x, 0)
+                                        return (
+                                            <Table.Summary fixed>
+                                                <Table.Summary.Row>
+                                                    <Table.Summary.Cell index={0}></Table.Summary.Cell>
+                                                    <Table.Summary.Cell index={1}></Table.Summary.Cell>
+                                                    <Table.Summary.Cell index={2}></Table.Summary.Cell>
+                                                    <Table.Summary.Cell index={3}>{total}</Table.Summary.Cell>
+                                                </Table.Summary.Row>
+                                            </Table.Summary>
+                                        )
+                                    }}
                                 />
                             </Card>
                         ))

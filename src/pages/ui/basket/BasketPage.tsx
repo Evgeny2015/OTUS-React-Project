@@ -35,7 +35,7 @@ const BasketPage: FC = () => {
   const handleCreateOrder = () => {
 
     const order: OrderAddModel = {
-      products: prodInBasket.map(x => { return { id: x.id, quantity: 1 } })
+      products: prodInBasket.map(x => { return { id: x.id, quantity: x.quantity } })
     }
 
     createOrder(order)
