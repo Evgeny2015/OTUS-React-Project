@@ -1,7 +1,21 @@
+.category {
+    padding: 5px;
+    width: 650px;
+}
+
 .scrollBox {
     display: flex;
     flex-direction: column;
     height: 800px;
     width: min-content;
     overflow: auto;
+}
+
+.add-product-link {
+    padding: 5px 20px;
+}
+
+.categoty-link {
+    padding: 0 5px;
+    white-space: nowrap;
 }

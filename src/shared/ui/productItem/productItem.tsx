@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import { Button, Card, Flex, Image, Space, Statistic } from 'antd';
+import { Button, Card, Flex, Image, Space, Statistic, Typography } from 'antd';
 import { LikeOutlined, EditOutlined } from '@ant-design/icons'
 import './productItem.css';
 
@@ -28,7 +28,7 @@ const ProductItem: FC<ProductItemProps> = ({ product, editLink: edit, onAddToBas
         <Card
             className='product-card'
             title={product.name}
-            extra={isAdmin() && (!!edit) && <a href={edit}>ред <EditOutlined/></a>}
+            extra={isAdmin() && (!!edit) && <Typography.Link href={edit}>ред <EditOutlined/></Typography.Link>}
             >
             <Flex vertical={true}>
                 <Flex vertical={false}>

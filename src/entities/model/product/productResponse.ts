@@ -1,9 +1,4 @@
-import type { Pagination, Sorting } from ".."
 import type { Product } from "."
+import type { Response } from ".."
 
-
-export type ProductResponse = {
-    data: Product[];
-    sorting: Sorting;
-    pagination: Pagination;
-}
+export type ProductResponse = Response<Product>

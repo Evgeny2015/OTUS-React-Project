@@ -1,7 +1,7 @@
 import { type Action, configureStore, type ThunkAction } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { app, basket, profile, token } from './'
-import { AuthApi, OrderApi, ProductApi } from '../api'
+import { AuthApi, CategoryApi, OrderApi, ProductApi } from '../api'
 
 
 export const rtkStore = configureStore({
@@ -11,12 +11,14 @@ export const rtkStore = configureStore({
     profile,
     token,
     [AuthApi.reducerPath]: AuthApi.reducer,
+    [CategoryApi.reducerPath]: CategoryApi.reducer,
     [OrderApi.reducerPath]: OrderApi.reducer,
     [ProductApi.reducerPath]: ProductApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(AuthApi.middleware)
+      .concat(CategoryApi.middleware)
       .concat(OrderApi.middleware)
       .concat(ProductApi.middleware)
 });

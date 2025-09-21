@@ -85,12 +85,12 @@ content-type: application/json
 }
 
 ### удаление категории
-DELETE  {{protocol}}://{{host}}/api/categories/68bc7b588e877ac8a9c6a82c
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+DELETE  {{protocol}}://{{host}}/api/categories/68d011f88e877ac8a9c6d78d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODQ2MTAxOCwiZXhwIjoxNzU5MzI1MDE4fQ.eWjoia-z_VW08byuEqntdxGGYe3JbzMWTaEL7b7Xiiw
 
 
 ### Категория по ID
-GET {{protocol}}://{{host}}/api/categories/651c26138a42911d60f0305d
+GET {{protocol}}://{{host}}/api/categories/68bc7bc78e877ac8a9c6a83e
 
 
 
@@ -99,7 +99,12 @@ GET {{protocol}}://{{host}}/api/categories/651c26138a42911d60f0305d
 GET {{protocol}}://{{host}}/api/products?pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
 
 ### Продукты команды
-GET {{protocol}}://{{host}}/api/products?pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
+GET {{protocol}}://{{host}}/api/products?categoryIds=["68bc7bc78e877ac8a9c6a83e"]&pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODM4MDczMSwiZXhwIjoxNzU5MjQ0NzMxfQ.TYECs8NOBEQ5HIIqknEXomP-zWZUBvw22XDJ9v8Yylc
+
+
+### Продукты команды
+GET {{protocol}}://{{host}}/api/products?categoryIds=[]&pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1ODM4MDczMSwiZXhwIjoxNzU5MjQ0NzMxfQ.TYECs8NOBEQ5HIIqknEXomP-zWZUBvw22XDJ9v8Yylc
 
 ###

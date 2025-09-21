@@ -6,6 +6,8 @@ export const APP_ROUTE = {
     profile: '/profile',
     register: '/register',
 
+    category: '/cat',
+
     product: '/prod',
     productAdd: '/add',
     productEdit: '/edit',

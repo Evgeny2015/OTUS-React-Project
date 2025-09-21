@@ -1,14 +1,15 @@
 import { type FC, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { useDispatch } from "react-redux"
-import { Button } from "antd"
+import { Flex, Typography } from "antd"
+import { EditOutlined } from '@ant-design/icons'
 
 import { APP_ROUTE } from "../../../app"
-import { ProductApi } from "../../../app/api"
+import { CategoryApi, ProductApi } from "../../../app/api"
 import { useAuth } from "../../../app/providers"
 import { basketActions } from "../../../app/store"
-import { ProductItem } from "../../../shared"
-import { GetBasketFromProduct, type Product } from "../../../entities"
+import { CategorySelector, ProductItem } from "../../../shared"
+import { categoryFilter, GetBasketFromProduct, type Category, type Product } from "../../../entities"
 import './ProductPage.css'
 
 
@@ -18,19 +19,25 @@ const LIST_GROW_COUNT = 4
 let products = new Map<string, Product>()
 let page = 1
 
+
 const ProductPage: FC = () => {
   const { isAdmin } = useAuth()
   const containerRef = useRef<HTMLDivElement>(null)
   const dispatcher = useDispatch()
   const [lastItem, setLastItem] = useState<Element>()
+  const [selectedCategory, setSelectedCategory] = useState<Category[]>([])
   const [product, setProduct] = useState<Product[]>([])
   const navigator = useNavigate()
+
+  const categoryApi = CategoryApi.useRtkGetCategorysQuery(categoryFilter)
+  const categories = categoryApi.data
   const [getProducts] = ProductApi.useRtkGetProductsMutation()
 
   // Загружаем следующую страницу продуктов
   const loadNextProduct = () => {
     getProducts(
       {
+        categoryIds: selectedCategory.map(x => x.name),
         pagination: {
           pageSize: LIST_GROW_COUNT,
           pageNumber: page
@@ -76,7 +83,7 @@ const ProductPage: FC = () => {
       loadNextProduct()
     else
       setProduct([...products.values()])
-  }, [])
+  }, [selectedCategory])
 
   // При изменении списка запоминаем последнюю позицию
   useEffect(() => {
@@ -103,8 +110,29 @@ const ProductPage: FC = () => {
     dispatcher(basketActions.add(GetBasketFromProduct(product)))
   }
 
+  const handleChangeCategory = (selected: string[]) => {
+    setSelectedCategory(selectedCategory.filter(x => selected.includes(x.id)))
+    console.debug('sel ==', selected)
+  }
+
   return (
-    <div>
+    <>
+      <Flex vertical className="category">
+        <Typography.Title level={5}>Категории</Typography.Title >
+        <Flex>
+          <CategorySelector
+            options={categories?.data.map(x => ({label: x.name, value: x.id})) ?? []}
+            defaults={(categories && categories.data.length > 0) ? [categories?.data[0].name] : []}
+            onChange={handleChangeCategory}
+            />
+          <span className="categoty-link">
+            <Typography.Link
+              href={APP_ROUTE.category}>
+              ред <EditOutlined />
+            </Typography.Link>
+          </span>
+        </Flex>
+      </Flex>
       <div className='scrollBox' ref={containerRef}>
         {product.length > 0 &&
           product.map(x => (
@@ -119,9 +147,15 @@ const ProductPage: FC = () => {
       </div>
 
       {isAdmin() &&
-        <Button type="primary" onClick={() => navigator(APP_ROUTE.productAdd)}>Новый товар</Button>
+        <div className="add-product-link">
+          <Typography.Link
+            onClick={() => navigator(APP_ROUTE.productAdd)}
+          >
+            Новый товар
+          </Typography.Link>
+        </div>
       }
-    </div>
+    </>
   )
 }
 
