@@ -26,6 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - run: cat ./src/pages/ui/register/registerPage.tsx
+    
     - name: Install package
       run: npm ci
 
