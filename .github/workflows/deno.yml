@@ -29,7 +29,6 @@ jobs:
 
     - run: ls ./src/pages/ui/
     - run: ls ./src/pages/ui/register/
-    - run: cat ./src/pages/ui/register/registerPage.tsx
     
     - name: Install package
       run: npm ci
