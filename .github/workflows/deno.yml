@@ -57,6 +57,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       
-      - run: ls ./docs/
+      - run: ls
 
   
