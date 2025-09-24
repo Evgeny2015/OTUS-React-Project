@@ -40,6 +40,8 @@ jobs:
       with:
         path: dist/
 
+    - run: ls dist/
+
   deploy:
     environment:
       name: github-pages
