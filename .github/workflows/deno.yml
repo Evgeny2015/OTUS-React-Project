@@ -38,5 +38,5 @@ jobs:
       id: deployment
       uses: actions/upload-pages-artifact@v4
       with:
-        path: build_outputs_folder/
+        path: dist/
       
