@@ -45,7 +45,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}/dist
+      url: ${{ steps.deployment.outputs.page_url }}docs
     permissions:
       contents: read
       pages: write
@@ -56,7 +56,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      
-      - run: ls
+        with:
+          folder: dist
 
   
