@@ -1,4 +1,4 @@
-@protocol = http
+@protocol = https
 @host = 19429ba06ff2.vps.myjino.ru
 @graphql =  http://cea3c11a3f62.vps.myjino.ru/graphql
 

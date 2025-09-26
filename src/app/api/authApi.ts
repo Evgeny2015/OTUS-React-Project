@@ -16,6 +16,7 @@ export const AuthApi = createApi({
             }
             return headers
         },
+        mode: 'cors'
     }),
     endpoints: (builder) => ({
         rtkGetProfile: builder.mutation<Profile, void>({
